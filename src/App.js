@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { context } from './stores/Context';
+import Todos from './components/Todos';
+import { retrieveTodos } from './services';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    retrieveTodos.retrieveTodos();
+  }
   render() {
     return (
       <div className="App">
@@ -20,9 +27,12 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <div>
+          <Todos />
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+export default context(App);
