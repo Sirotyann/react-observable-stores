@@ -26,7 +26,8 @@ const observer = (WrappedComponent, store) => {
         <AppContext.Consumer>
             {consumeData => {
                 console.log("observer | render", consumeData, store)
-                return <Content {...{...props, ...consumeData.get(store.getTarget())}} />;
+                return <Content {...{...props, ...store}} />;
+                // return <Content {...{...props, ...consumeData.get(store._id)}} />;
             }}
         </AppContext.Consumer>
     );

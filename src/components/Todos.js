@@ -1,14 +1,12 @@
 import React from 'react';
-import {todosStore} from '../stores/Stores';
+import { todosStore } from '../stores/Stores';
 import { observer } from '../stores/Context';
 
 const Todos = (props) => {
-    console.log("Todos | render", props);
-    return (<ul>
+    const todos = props ? props.todos : [];
+    return (<ul className="todos">
         {
-            props.todos.map((todo) => {
-                <Todo {...todo} />
-            });
+            todos.map((todo) => <Todo key={todo.id} {...todo} />)
         }
     </ul>)
 }

@@ -1,3 +1,4 @@
+import { List } from 'immutable';
 import { todosStore } from '../stores/Stores';
 
 const retrieveTodos = () => {
@@ -7,4 +8,10 @@ const retrieveTodos = () => {
     ])
 }
 
-export { retrieveTodos };
+const addTodo = () => {
+    const now = new Date();
+    todosStore.todos = [...todosStore.todos, {id: now.getTime(), name: `A todo created at ${now.getHours()}:${now.getSeconds()}`}];
+}
+
+
+export default { retrieveTodos, addTodo };

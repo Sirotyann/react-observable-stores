@@ -3,26 +3,25 @@ import { StateManagement } from './Context';
 const _data = new Map();
 let index = 1;
 
+const updatetore = (store) => {
+    _data.set(store._id, store);
+}
+
+const updateState = () => {
+    StateManagement.update(new Map(_data));
+}
+
 class Store {
     constructor() {
-        _data.set(this, {});
         this._clazz = `Store_${index}`;
+        this._id = Symbol();
+        updatetore(this);
         index++;
     }
 
-    _notifyChange(name) {
-        const store = _data.get(this);
-        const obj = {};
-        obj[name] = this[name];
-        _data.set(this, { ...store, ...obj });
-        StateManagement.update(new Map(_data));
-    }
-
-    _notifyAll() {
-        const store = _data.get(this);
-        const { _notifyChange, _notifyAll, apply, ...obj } = this;
-        _data.set(this, { ...store, ...obj });
-        StateManagement.update(new Map(_data));
+    _notifyChange() {
+        updatetore(this);
+        updateState();
     }
 
     apply(data) {
@@ -43,14 +42,14 @@ const createStore = props => {
 
     const proxy = new Proxy(store, {
         get(target, key, receiver) {
-            console.log("get ", {target, key, receiver});
-            return _data.get(store)[key];
-            // return Reflect.get(target, key, receiver);
+            // console.log("get ", {target, key, receiver});
+            // return _data.get(store)[key];
+            return Reflect.get(target, key, receiver);
         },
         set(target, key, value, receiver) {
             console.log("set ", {target, key, receiver});
             const result = Reflect.set(target, key, value, receiver);
-            target._notifyChange(key);
+            target._notifyChange();
             return result;
         },
     });

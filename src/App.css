@@ -31,3 +31,17 @@
     transform: rotate(360deg);
   }
 }
+
+ul {
+  list-style: none;
+}
+
+ul.todos > li {
+  line-height: 30px;
+  padding: 3px 10px 3px;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+button {
+  padding: 5px 15px 5px;
+}
