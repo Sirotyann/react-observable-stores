@@ -34,14 +34,29 @@
 
 ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-ul.todos > li {
+ul.todos > li, ul.contacts > li {
   line-height: 30px;
   padding: 3px 10px 3px;
   border-bottom: 1px solid #dcdcdc;
 }
 
+ul.contacts {
+  background: #282c34;
+  color: #CCCCCC;
+}
+
 button {
   padding: 5px 15px 5px;
+}
+
+.content {
+  display: flex;
+}
+
+.content > div {
+  flex: 1;
 }

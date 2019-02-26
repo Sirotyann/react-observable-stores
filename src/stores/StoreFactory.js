@@ -3,7 +3,7 @@ import { StateManagement } from './Context';
 const _data = new Map();
 let index = 1;
 
-const updatetore = (store) => {
+const updateStore = (store) => {
     _data.set(store._id, store);
 }
 
@@ -15,19 +15,23 @@ class Store {
     constructor() {
         this._clazz = `Store_${index}`;
         this._id = Symbol();
-        updatetore(this);
+        updateStore(this);
         index++;
     }
 
     _notifyChange() {
-        updatetore(this);
+        updateStore(this);
         updateState();
     }
 
     apply(data) {
-        console.log('Store | apply', data, this);
-        const store = _data.get(this);
-        _data.set(this, { ...store, ...data });
+        Object.getOwnPropertyNames(data).forEach((key) => {
+            const item = data[key];
+            if (typeof item !== 'function') {
+                this[key] = item;
+            }
+        });
+        updateStore(this);
         StateManagement.update(new Map(_data));
     }
 }
@@ -47,7 +51,7 @@ const createStore = props => {
             return Reflect.get(target, key, receiver);
         },
         set(target, key, value, receiver) {
-            console.log("set ", {target, key, receiver});
+            // console.log("set ", {target, key, receiver});
             const result = Reflect.set(target, key, value, receiver);
             target._notifyChange();
             return result;

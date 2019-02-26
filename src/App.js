@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { context } from './stores/Context';
 import Todos from './components/Todos';
+import Contacts from './components/Contacts';
 import service from './services';
 
 class App extends Component {
@@ -14,15 +14,35 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <button onClick={() => {
-          service.addTodo();
-        }}>Add Random Todo</button>
-        <div>
-          <Todos />
+        <div className="content">
+          <TodoPanel />
+          <ContactsPanel />
         </div>
       </div>
     );
   }
 }
+
+const TodoPanel = () => (<div>
+  <button onClick={() => {
+    service.addTodo();
+  }}>
+    Add Random Todo
+  </button>
+  <div>
+    <Todos />
+  </div>
+</div>);
+
+const ContactsPanel = () => (<div>
+  <button onClick={() => {
+    service.loadContacts();
+  }}>
+    Load Contacts
+  </button>
+  <div>
+    <Contacts />
+  </div>
+</div>);
 
 export default context(App);
