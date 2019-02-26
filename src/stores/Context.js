@@ -3,20 +3,15 @@ import React, { useState } from 'react';
 const StateManagement = { update: () => { } };
 const _data = new Map();
 
-const AppContext = React.createContext({});
+// const AppContext = React.createContext({});
 
 const context = WrappedComponent => {
-    const Content = props => <WrappedComponent {...props} />;
     return props => {
         const [data, setData] = useState(_data);
         StateManagement.update = state => {
             setData(state);
         };
-        return (
-            <AppContext.Provider value={data}>
-                <Content {...props} />
-            </AppContext.Provider>
-        );
+        return <WrappedComponent {...props} />;
     };
 };
 
@@ -26,11 +21,7 @@ const observer = (WrappedComponent, store) => {
             return <WrappedComponent {...this.props} />;
         }
     }
-    return props => (
-        <AppContext.Consumer>
-            {() => (<Pure {...{ ...props, ...store }} />)}
-        </AppContext.Consumer>
-    );
+    return props => <Pure {...{ ...props, ...store }} />;
 };
 
 export { context, observer, StateManagement };

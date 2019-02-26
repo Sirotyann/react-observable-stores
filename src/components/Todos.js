@@ -12,22 +12,6 @@ const Todos = (props) => {
     </ul>);
 }
 
-// class Todos extends React.PureComponent {
-//     // shouldComponentUpdate(nextProps, nextState) {
-//     //     console.log(`[Todos] nextProps==props :: ${nextProps == this.props}`);
-//     //     return nextProps != this.props;
-//     // }
-//     render() {
-//         console.log(`[Todos].render`);
-//         const todos = this.props.todos ? this.props.todos : [];
-//         return (<ul className="todos">
-//             {
-//                 todos.map((todo) => <Todo key={todo.id} {...todo} />)
-//             }
-//         </ul>);
-//     }
-// }
-
 const Todo = (props) => (<li>{props.name}</li>);
 
 export default observer(Todos, todosStore);

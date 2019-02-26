@@ -13,10 +13,10 @@ const updateState = () => {
 
 class Store {
     constructor() {
-        this._clazz = `Store_${index}`;
+        // this._clazz = `Store_${index}`;
         this._id = Symbol();
         updateStore(this);
-        index++;
+        // index++;
     }
 
     _notifyChange() {
@@ -31,8 +31,7 @@ class Store {
                 this[key] = item;
             }
         });
-        updateStore(this);
-        StateManagement.update(new Map(_data));
+        this._notifyChange();
     }
 }
 

@@ -1,10 +1,10 @@
 import createStore from './StoreFactory';
 
-let index = 1;
+// let index = 1;
 const createReducer = (defaultData, _dispatch) => {
     const data = createStore(defaultData).getTarget();
-    data._clazz = `Reducer_${index}`;
-    index++;
+    // data._clazz = `Reducer_${index}`;
+    // index++;
     data.dispatch = (action) => {
         const newData = _dispatch(action, data);
         data.apply(newData);
