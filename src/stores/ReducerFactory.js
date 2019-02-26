@@ -7,7 +7,6 @@ const createReducer = (defaultData, _dispatch) => {
     index++;
     data.dispatch = (action) => {
         const newData = _dispatch(action, data);
-        console.log("reducer dispatch", data, newData);
         data.apply(newData);
     }
 

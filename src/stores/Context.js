@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-const StateManagement = {update: () => {}};
+const StateManagement = { update: () => { } };
 const _data = new Map();
 
 const AppContext = React.createContext({});
@@ -21,16 +21,16 @@ const context = WrappedComponent => {
 };
 
 const observer = (WrappedComponent, store) => {
-    const Content = props => <WrappedComponent {...props} />;
+    class Pure extends React.PureComponent {
+        render() {
+            return <WrappedComponent {...this.props} />;
+        }
+    }
     return props => (
         <AppContext.Consumer>
-            {consumeData => {
-                // console.log("observer | render", consumeData, store)
-                return <Content {...{...props, ...store}} />;
-                // return <Content {...{...props, ...consumeData.get(store._id)}} />;
-            }}
+            {() => (<Pure {...{ ...props, ...store }} />)}
         </AppContext.Consumer>
     );
 };
 
-export {context, observer, StateManagement};
+export { context, observer, StateManagement };

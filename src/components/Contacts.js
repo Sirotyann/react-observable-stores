@@ -11,7 +11,7 @@ const Contacts = (props) => {
             contacts.map(it => <Contact key={it.id} {...it} />)
         }
     </ul>)
-}
+};
 
 const Contact = (props) => (<li>{props.name}<button onClick={() => {
     service.removeContact(props.id)
