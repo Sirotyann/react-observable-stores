@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 
-const StateManagement = { update: () => { } };
+const StateManagement = {update: null};
 const _data = new Map();
-
-// const AppContext = React.createContext({});
 
 const context = WrappedComponent => {
     return props => {
         const [data, setData] = useState(_data);
-        StateManagement.update = state => {
-            setData(state);
-        };
-        return <WrappedComponent {...props} />;
+        if (!StateManagement.update) {
+            StateManagement.update = state => {
+                const nextState = {...data, ...state};
+                setData(nextState);
+            };
+        }
+        return <WrappedComponent {...{...props, ...data}} />;
     };
 };
 
