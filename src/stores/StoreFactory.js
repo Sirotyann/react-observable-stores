@@ -15,7 +15,7 @@ let updateState = () => {
 let index = 1;
 class Store {
     constructor() {
-        this._id = Symbol(`Store_${index++}`);
+        this._id = Symbol(`Store_${index}`);
         index += 1;
         updateStore(this);
     }

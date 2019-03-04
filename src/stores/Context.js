@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 const StateManagement = {update: null};
 const _data = new Map();
@@ -22,7 +22,7 @@ const observer = (WrappedComponent, store) => {
             return <WrappedComponent {...this.props} />;
         }
     }
-    return props => <Pure {...{ ...props, ...store }} />;
+    return props => <Pure {...{...props, ...store}} />;
 };
 
-export { context, observer, StateManagement };
+export {context, observer, StateManagement};
