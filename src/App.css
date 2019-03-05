@@ -60,3 +60,41 @@ button {
 .content > div {
   flex: 1;
 }
+
+ul.tabs {
+  display: flex;
+  margin-bottom: 15px; 
+}
+
+ul.tabs > li {
+  cursor: pointer;
+  flex: 1;
+  padding: 10px;
+  background: #CCC;
+  border: 1px solid #999;
+  color: #666;
+}
+
+ul.tabs > li.active {
+  cursor: none;
+  background: #666;
+  color: #fafafa;
+  border: 1px solid #666;
+}
+
+ul.histories {
+  margin-top: 10px; 
+  color: #666;
+}
+
+ul.histories li {
+  padding: 10px;
+}
+
+ul.histories li:nth-child(2n+1){
+  background: #eaeaea;
+}
+
+ul.histories li:nth-child(2n){
+  background: #fafafa;
+}

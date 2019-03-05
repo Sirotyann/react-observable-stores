@@ -5,4 +5,8 @@ const todosStore = createStore({
     todos: new List()
 });
 
-export { todosStore };
+const todoColorsStore = createStore({
+    colors: []
+});
+
+export { todosStore, todoColorsStore };

@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-const StateManagement = {update: null};
+const StateManagement = { update: null };
 const _data = new Map();
 
 const context = WrappedComponent => {
@@ -8,21 +8,23 @@ const context = WrappedComponent => {
         const [data, setData] = useState(_data);
         if (!StateManagement.update) {
             StateManagement.update = state => {
-                const nextState = {...data, ...state};
+                const nextState = { ...data, ...state };
                 setData(nextState);
             };
         }
-        return <WrappedComponent {...{...props, ...data}} />;
+        return <WrappedComponent {...{ ...props, ...data }} />;
     };
 };
 
-const observer = (WrappedComponent, store) => {
+const observer = (WrappedComponent, stores) => {
     class Pure extends React.PureComponent {
         render() {
             return <WrappedComponent {...this.props} />;
         }
     }
-    return props => <Pure {...{...props, ...store}} />;
+    return (stores instanceof Array) ?
+        props => <Pure {...{ ...props, ...Object.assign.apply(null, [{}, ...stores]) }} /> :
+        props => <Pure {...{ ...props, ...stores }} />;
 };
 
-export {context, observer, StateManagement};
+export { context, observer, StateManagement };

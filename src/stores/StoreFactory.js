@@ -1,4 +1,4 @@
-import {StateManagement} from './Context';
+import { StateManagement } from './Context';
 
 const _data = new Map();
 

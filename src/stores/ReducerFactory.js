@@ -1,10 +1,11 @@
 import createStore from './StoreFactory';
+import log from '../utils/log';
 
 const createReducer = (defaultData, _dispatch) => {
     const data = createStore(defaultData).getTarget();
     data.dispatch = action => {
         // eslint-disable-next-line no-console
-        console.log(`%c -- Reducer dispatch action ${action.type.toString()}`, 'color: #999999');
+        log(` -- Reducer dispatch action ${action.type.toString()}`);
         const newData = _dispatch(action, data);
         data.apply(newData);
     };
