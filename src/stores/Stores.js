@@ -1,12 +1,12 @@
 import { List } from 'immutable';
-import createStore from './StoreFactory';
+import { createStore } from './Context';
 
 const todosStore = createStore({
-    todos: new List()
+	todos: new List(),
 });
 
 const todoColorsStore = createStore({
-    colors: []
+	colors: [],
 });
 
 export { todosStore, todoColorsStore };
