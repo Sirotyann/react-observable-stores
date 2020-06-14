@@ -61,6 +61,11 @@ const observer = (WrappedComponent, stores) => {
 		constructor(props) {
 			super(props);
 			this.___id = `observer_${WrappedComponent.___id}`;
+			this.refreshState = () => {
+				if (this._mounted) {
+					this.setState(mergeStores());
+				}
+			};
 			this.state = mergeStores();
 			this.reaction = new Reaction(
 				isArray ? stores : [stores],
@@ -68,12 +73,6 @@ const observer = (WrappedComponent, stores) => {
 				this.___id
 			);
 		}
-
-		refreshState = () => {
-			if (this._mounted) {
-				this.setState(mergeStores());
-			}
-		};
 
 		componentDidMount() {
 			this._mounted = true;
