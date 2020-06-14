@@ -1,6 +1,5 @@
 import React from 'react';
 
-const StateManagement = { update: null };
 const _data = new Map();
 const _observers = new Map();
 let _viewIndex = 1;
@@ -171,12 +170,10 @@ const createStore = (props) => {
 const createReducer = (defaultData, _dispatch) => {
 	const data = createStore(defaultData);
 	data.dispatch = (action) => {
-		// eslint-disable-next-line no-console
-		console.log(`%c -- Reducer dispatch action ${action.type.toString()}`, 'color: #999999');
 		const newData = _dispatch(action, data);
 		data.apply(newData);
 	};
 	return data;
 };
 
-export { observer, StateManagement, createStore, createReducer };
+export { observer, createStore, createReducer };
